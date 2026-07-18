@@ -29,6 +29,7 @@ coverage/
 # local AI-agent tooling bundled by the Expo template
 .agents/
 .claude/
+skills-lock.json
 
 # misc
 .DS_Store
