@@ -6,14 +6,9 @@ import {
   Globe02Icon,
 } from "@hugeicons/core-free-icons";
 import { Slot, useRouter, usePathname } from "expo-router";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import { useTheme } from "@/theme";
 import { TABS, tabKeyFromPathname, type TabKey } from "./tabs";
 
 const HUGEICONS: Record<TabKey, typeof Home03Icon> = {
@@ -26,7 +21,7 @@ const HUGEICONS: Record<TabKey, typeof Home03Icon> = {
 export default function AppTabs() {
   const router = useRouter();
   const selected = tabKeyFromPathname(usePathname());
-  const isDark = useColorScheme() === "dark";
+  const { colors } = useTheme();
 
   return (
     <View style={styles.root}>
@@ -36,20 +31,14 @@ export default function AppTabs() {
         style={[
           styles.bar,
           {
-            backgroundColor: isDark ? "#111111" : "#ffffff",
-            borderTopColor: isDark ? "#2a2a2a" : "#e5e5e5",
+            backgroundColor: colors.background,
+            borderTopColor: colors.border,
           },
         ]}
       >
         {TABS.map((tab) => {
           const focused = selected === tab.key;
-          const color = focused
-            ? isDark
-              ? "#ffffff"
-              : "#111111"
-            : isDark
-              ? "#888888"
-              : "#999999";
+          const color = focused ? colors.text : colors.textMuted;
 
           return (
             <Pressable
