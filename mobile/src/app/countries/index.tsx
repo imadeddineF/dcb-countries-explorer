@@ -1,8 +1,10 @@
-import { Host, Column, Text, Button } from "@expo/ui";
+import { Host, Column, Button } from "@expo/ui";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 
 import { Screen } from "@/components/shared/screen";
+import { ThemedText } from "@/components/shared/themed-text";
+// import { useTheme } from "@/theme";
 
 const COUNTRIES = [
   { id: "pl", name: "Palestine" },
@@ -12,12 +14,15 @@ const COUNTRIES = [
 
 export default function Countries() {
   const router = useRouter();
+  // const { colors } = useTheme();
 
   return (
     <Screen>
-      <Host style={styles.host}>
+      <Host style={[styles.host]}>
         <Column spacing={12} style={styles.content}>
-          <Text textStyle={{ fontSize: 20, fontWeight: "600" }}>Countries</Text>
+          <ThemedText textStyle={{ fontSize: 20, fontWeight: "600" }}>
+            Countries
+          </ThemedText>
           {COUNTRIES.map((country) => (
             <Button
               key={country.id}
@@ -39,7 +44,6 @@ export default function Countries() {
 const styles = StyleSheet.create({
   host: {
     flex: 1,
-    backgroundColor: "#eeeeee",
   },
   content: { flex: 1, padding: 16 },
 });

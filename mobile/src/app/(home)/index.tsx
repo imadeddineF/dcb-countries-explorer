@@ -1,17 +1,21 @@
-import { Host, Column, Text } from "@expo/ui";
+import { Host, Column } from "@expo/ui";
 import { Platform, StyleSheet } from "react-native";
 
 import { Screen } from "@/components/shared/screen";
+import { ThemedText } from "@/components/shared/themed-text";
+// import { useTheme } from "@/theme";
 
 export default function Index() {
+  // const { colors } = useTheme();
+
   return (
     <Screen>
-      <Host style={styles.host}>
+      <Host style={[styles.host]}>
         <Column spacing={8} alignment="center" style={styles.content}>
-          <Text textStyle={{ fontSize: 20, fontWeight: "600" }}>
+          <ThemedText textStyle={{ fontSize: 20, fontWeight: "600" }}>
             Hello there!
-          </Text>
-          <Text textStyle={{ fontSize: 14 }}>{Platform.OS}</Text>
+          </ThemedText>
+          <ThemedText textStyle={{ fontSize: 14 }}>{Platform.OS}</ThemedText>
         </Column>
       </Host>
     </Screen>
@@ -21,7 +25,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   host: {
     flex: 1,
-    backgroundColor: "#eeeeee",
   },
   content: {
     flex: 1,
