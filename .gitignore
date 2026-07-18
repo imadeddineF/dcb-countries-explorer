@@ -1,0 +1,37 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# expo
+.expo/
+dist/
+web-build/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# next.js
+.next/
+out/
+build/
+next-env.d.ts
+
+# testing
+coverage/
+
+# env
+.env*
+
+# local AI-agent tooling bundled by the Expo template
+.agents/
+.claude/
+
+# misc
+.DS_Store
+*.pem
+*.log
+*.tsbuildinfo
