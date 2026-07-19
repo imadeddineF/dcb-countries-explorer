@@ -1,0 +1,11 @@
+{
+  "tabs": {
+    "home": "Home",
+    "countries": "Countries",
+    "notifications": "Notifications",
+    "account": "Account"
+  },
+  "language": {
+    "switch": "Switch language"
+  }
+}

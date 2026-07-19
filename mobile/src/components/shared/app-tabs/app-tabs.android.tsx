@@ -8,6 +8,7 @@ import {
 import { Slot, useRouter, usePathname } from "expo-router";
 import { StyleSheet, View, type ImageSourcePropType } from "react-native";
 
+import { useTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { TABS, tabKeyFromPathname, type TabKey } from "./tabs";
 const MD_ICONS: Record<TabKey, ImageSourcePropType> = {
@@ -21,12 +22,13 @@ export default function AppTabs() {
   const router = useRouter();
   const selected = tabKeyFromPathname(usePathname());
   const { colors } = useTheme();
+  const { t, language } = useTranslation();
 
   return (
     <View style={styles.root}>
       <Slot />
 
-      <Host matchContents={{ vertical: true }}>
+      <Host key={language} matchContents={{ vertical: true }}>
         {/* The Compose host doesn't follow RN's Appearance override, so the
             palette is passed explicitly to keep the bar in sync with the app theme */}
         <NavigationBar containerColor={colors.background}>
@@ -47,7 +49,7 @@ export default function AppTabs() {
                 <Icon source={MD_ICONS[tab.key]} />
               </NavigationBarItem.Icon>
               <NavigationBarItem.Label>
-                <Text>{tab.label}</Text>
+                <Text>{t(tab.labelKey)}</Text>
               </NavigationBarItem.Label>
             </NavigationBarItem>
           ))}

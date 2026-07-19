@@ -1,0 +1,11 @@
+{
+  "tabs": {
+    "home": "Accueil",
+    "countries": "Pays",
+    "notifications": "Notifications",
+    "account": "Compte"
+  },
+  "language": {
+    "switch": "Changer de langue"
+  }
+}

@@ -1,8 +1,10 @@
 import { Stack } from "expo-router";
+import { useTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 
 export default function CountriesLayout() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Stack
@@ -14,7 +16,10 @@ export default function CountriesLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="country/[id]" options={{ title: "Country" }} />
+      <Stack.Screen
+        name="(country)/[id]"
+        options={{ title: t("countryDetail.headerTitle") }}
+      />
     </Stack>
   );
 }

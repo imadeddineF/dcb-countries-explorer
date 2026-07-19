@@ -6,7 +6,8 @@ export type TabKey = "index" | "countries" | "notifications" | "account";
 export type TabConfig = {
   key: TabKey;
   href: Href;
-  label: string;
+  /** i18n key — resolve with t() at render time so labels follow the language. */
+  labelKey: string;
   /** iOS — SF Symbols (native SwiftUI TabView). */
   sf: { default: SFSymbol; selected: SFSymbol };
 };
@@ -15,25 +16,25 @@ export const TABS: TabConfig[] = [
   {
     key: "index",
     href: "/",
-    label: "Home",
+    labelKey: "tabs.home",
     sf: { default: "house", selected: "house.fill" },
   },
   {
     key: "countries",
     href: "/countries",
-    label: "Countries",
+    labelKey: "tabs.countries",
     sf: { default: "globe", selected: "globe.fill" },
   },
   {
     key: "notifications",
     href: "/notifications",
-    label: "Notifications",
+    labelKey: "tabs.notifications",
     sf: { default: "bell", selected: "bell.fill" },
   },
   {
     key: "account",
     href: "/account",
-    label: "Account",
+    labelKey: "tabs.account",
     sf: { default: "person.circle", selected: "person.circle.fill" },
   },
 ];
