@@ -1,0 +1,32 @@
+{
+  "home": {
+    "title": "Hello there!",
+    "platform": "Platform",
+    "countries": "Browse countries"
+  },
+  "account": {
+    "title": "Account",
+    "darkMode": "Dark mode",
+    "language": "Language"
+  },
+  "countryDetail": {
+    "headerTitle": "Country"
+  },
+  "countries": {
+    "title": "Countries",
+    "search": "Search countries",
+    "empty": "No countries found"
+  },
+  "tabs": {
+    "home": "Home",
+    "countries": "Countries",
+    "notifications": "Notifications",
+    "account": "Account"
+  },
+  "language": {
+    "switch": "Switch language"
+  },
+  "notifications": {
+    "title": "Notifications"
+  }
+}

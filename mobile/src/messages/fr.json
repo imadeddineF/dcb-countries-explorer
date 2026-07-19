@@ -1,0 +1,32 @@
+{
+  "home": {
+    "title": "Bonjour !",
+    "platform": "Plateforme",
+    "countries": "Voir les pays"
+  },
+  "account": {
+    "title": "Compte",
+    "darkMode": "Mode sombre",
+    "language": "Langue"
+  },
+  "countryDetail": {
+    "headerTitle": "Pays"
+  },
+  "countries": {
+    "title": "Pays",
+    "search": "Rechercher des pays",
+    "empty": "Aucun pays trouvé"
+  },
+  "tabs": {
+    "home": "Accueil",
+    "countries": "Pays",
+    "notifications": "Notifications",
+    "account": "Compte"
+  },
+  "language": {
+    "switch": "Changer de langue"
+  },
+  "notifications": {
+    "title": "Notifications"
+  }
+}

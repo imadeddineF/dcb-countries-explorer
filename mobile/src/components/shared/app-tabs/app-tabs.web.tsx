@@ -8,6 +8,7 @@ import {
 import { Slot, useRouter, usePathname } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import { useTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 import { TABS, tabKeyFromPathname, type TabKey } from "./tabs";
 
@@ -22,6 +23,7 @@ export default function AppTabs() {
   const router = useRouter();
   const selected = tabKeyFromPathname(usePathname());
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <View style={styles.root}>
@@ -51,7 +53,7 @@ export default function AppTabs() {
                 size={24}
                 color={color}
               />
-              <Text style={[styles.label, { color }]}>{tab.label}</Text>
+              <Text style={[styles.label, { color }]}>{t(tab.labelKey)}</Text>
             </Pressable>
           );
         })}
