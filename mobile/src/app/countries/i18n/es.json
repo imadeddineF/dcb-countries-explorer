@@ -2,6 +2,8 @@
   "countries": {
     "title": "Países",
     "search": "Buscar países",
-    "empty": "No se encontraron países"
+    "empty": "No se encontraron países",
+    "error": "Algo salió mal al cargar los países.",
+    "retry": "Reintentar"
   }
 }

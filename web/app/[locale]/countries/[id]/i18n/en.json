@@ -1,6 +1,12 @@
 {
   "countryDetail": {
     "title": "Country",
-    "back": "Back to countries"
+    "back": "Back to countries",
+    "error": "Could not load this country.",
+    "retry": "Retry",
+    "capital": "Capital",
+    "population": "Population",
+    "region": "Region",
+    "languages": "Languages"
   }
 }

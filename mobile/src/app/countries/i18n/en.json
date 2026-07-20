@@ -2,6 +2,8 @@
   "countries": {
     "title": "Countries",
     "search": "Search countries",
-    "empty": "No countries found"
+    "empty": "No countries found",
+    "error": "Something went wrong loading countries.",
+    "retry": "Retry"
   }
 }

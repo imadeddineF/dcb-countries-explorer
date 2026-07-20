@@ -2,6 +2,9 @@
   "countries": {
     "title": "Pays",
     "search": "Rechercher des pays",
-    "empty": "Aucun pays trouvé"
+    "empty": "Aucun pays trouvé",
+    "error": "Erreur lors du chargement des pays.",
+    "retry": "Réessayer",
+    "loading": "Chargement des pays"
   }
 }

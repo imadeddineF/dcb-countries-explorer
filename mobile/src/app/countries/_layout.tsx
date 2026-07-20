@@ -11,7 +11,6 @@ export default function CountriesLayout() {
       screenOptions={{
         headerStyle: { backgroundColor: colors.background },
         headerTintColor: colors.text,
-        // Screens under a header don't use <Screen>, so the Stack owns their bg
         contentStyle: { backgroundColor: colors.surface },
       }}
     >

@@ -1,1 +1,11 @@
-{ "countryDetail": { "headerTitle": "Country" } }
+{
+  "countryDetail": {
+    "headerTitle": "Country",
+    "error": "Could not load this country.",
+    "retry": "Retry",
+    "capital": "Capital",
+    "population": "Population",
+    "region": "Region",
+    "languages": "Languages"
+  }
+}

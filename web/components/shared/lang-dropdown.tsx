@@ -21,7 +21,7 @@ export function LangDropdown() {
       aria-label="Language"
       value={locale}
       onChange={(e) => router.replace(pathname, { locale: e.target.value })}
-      className="rounded-md border border-zinc-300 px-2 py-1 text-sm dark:border-zinc-700"
+      className="h-9 cursor-pointer rounded-lg border border-zinc-300 bg-transparent px-2 text-sm transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-950 dark:hover:bg-zinc-900"
     >
       {routing.locales.map((code) => (
         <option key={code} value={code}>

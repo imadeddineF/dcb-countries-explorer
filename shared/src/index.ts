@@ -2,6 +2,7 @@ export * from "./constants/api";
 export * from "./types/country";
 export * from "./utils/http";
 export * from "./utils/format";
+export * from "./utils/filter";
 export * from "./mappers/country";
 export * from "./services/countries";
 export * from "./hooks/query-keys";

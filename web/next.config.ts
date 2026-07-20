@@ -6,6 +6,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["@dcb/shared"],
   turbopack: {
     root: path.join(__dirname, ".."),
   },
