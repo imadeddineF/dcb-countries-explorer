@@ -5,6 +5,25 @@ My submission for the DCB Software frontend & mobile technical test: a cross-pla
 web companion, both consuming the REST Countries API through a single shared
 TypeScript layer.
 
+## Screenshots
+
+### Mobile app (Expo)
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/countries-list.png" width="200"/><br/>Country list</td>
+    <td align="center"><img src="docs/screenshots/country-search.png" width="200"/><br/>Debounced search</td>
+    <td align="center"><img src="docs/screenshots/country-detail.png" width="200"/><br/>Country detail</td>
+    <td align="center"><img src="docs/screenshots/countries-loading.png" width="200"/><br/>Loading state</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/account-dark.png" width="200"/><br/>Dark theme</td>
+    <td align="center"><img src="docs/screenshots/account-light.png" width="200"/><br/>Light theme</td>
+    <td align="center"><img src="docs/screenshots/language-switcher.png" width="200"/><br/>Language (EN / ES / FR)</td>
+    <td align="center"><img src="docs/screenshots/home.png" width="200"/><br/>Home &amp; native tabs</td>
+  </tr>
+</table>
+
 ## Stack & versions
 
 | | |
@@ -103,9 +122,17 @@ same hooks and render platform-native UI around the same data.
   "africa" should match African countries, not just two name substrings.
 - **Pagination against the free-plan cap.** v5 caps free requests at 100 objects, so
   `getCountries` pages through with `limit`/`offset` following `meta.more` until done.
-- **FlashList instead of FlatList.** Same API surface including `keyExtractor` (the
-  ISO alpha-3 code), better recycling performance on long lists. Swapping back is a
-  one-line change if strict FlatList is preferred.
+- **Native UI with `@expo/ui`.** I normally reach for plain React Native primitives,
+  but for this test I wanted to try `@expo/ui` — real SwiftUI on iOS and Jetpack
+  Compose on Android rendered from React. It's newer, so it cost me some extra time
+  getting familiar with it, but it was worth it: the screens and navigation feel
+  genuinely native rather than approximated. If a project needed the safest, most
+  conventional path I'd stick with RN primitives, but this was a good chance to push
+  on what the newer toolkit can do.
+- **FlashList instead of FlatList.** These are used exactly the same way — same props,
+  same `keyExtractor` (the ISO alpha-3 code); the only real difference is performance,
+  since FlashList recycles views more efficiently on long lists. So it's a drop-in
+  choice, and swapping back to FlatList is a one-line change if preferred.
 - **i18n with per-route JSON files.** Each route folder owns its translations
   (`i18n/en.json` etc.); a small merge script combines them into the locale bundles.
   Mobile uses i18n-js with device-language detection (expo-localization) and
@@ -130,3 +157,6 @@ same hooks and render platform-native UI around the same data.
   logic lives; the screens are thin by design.
 - **Non-ISO territories are filtered out** of the list (they come back from v5 with no
   alpha-3 code and no flag, which would break stable list keys and detail navigation).
+- **Extra Home and Notifications tabs** aren't part of the test scope — I kept them in
+  to show how native the tab navigation feels with `@expo/ui`. The Account tab is where
+  the real settings live (theme and language switching).
