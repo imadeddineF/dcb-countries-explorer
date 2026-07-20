@@ -1,1 +1,11 @@
-{ "countryDetail": { "headerTitle": "País" } }
+{
+  "countryDetail": {
+    "headerTitle": "País",
+    "error": "No se pudo cargar este país.",
+    "retry": "Reintentar",
+    "capital": "Capital",
+    "population": "Población",
+    "region": "Región",
+    "languages": "Idiomas"
+  }
+}

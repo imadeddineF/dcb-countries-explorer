@@ -1,30 +1,38 @@
+import {
+  filterCountries,
+  useCountries,
+  useDebounce,
+  type Country,
+} from "@dcb/shared";
 import { Host, Column, TextInput } from "@expo/ui";
 import { FlashList } from "@shopify/flash-list";
+import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useMemo, useState } from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import { Screen } from "@/components/shared/screen";
 import { ThemedText } from "@/components/shared/themed-text";
 import { useTranslation } from "@/i18n";
 import { useTheme } from "@/theme";
 
-const COUNTRIES = [
-  { id: "pl", name: "Palestine" },
-  { id: "alg", name: "Algeria" },
-  { id: "jp", name: "Japan" },
-];
-
-type Country = (typeof COUNTRIES)[number];
-
 export default function Countries() {
   const router = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [query, setQuery] = useState("");
+  const search = useDebounce(query, 300);
+  const { data, isPending, isError, refetch } = useCountries();
 
-  const filtered = COUNTRIES.filter((country) =>
-    country.name.toLowerCase().includes(query.trim().toLowerCase()),
+  const filtered = useMemo(
+    () => filterCountries(data ?? [], search),
+    [data, search],
   );
 
   return (
@@ -56,38 +64,80 @@ export default function Countries() {
           </Column>
         </Host>
 
-        <FlashList
-          data={filtered}
-          keyExtractor={(item) => item.id}
-          style={styles.list}
-          contentContainerStyle={styles.listContent}
-          ListEmptyComponent={
-            <Text style={[styles.empty, { color: colors.textMuted }]}>
-              {t("countries.empty")}
+        {isPending ? (
+          <View style={styles.center}>
+            <ActivityIndicator size="large" color={colors.text} />
+          </View>
+        ) : isError ? (
+          <View style={styles.center}>
+            <Text style={[styles.message, { color: colors.textMuted }]}>
+              {t("countries.error")}
             </Text>
-          }
-          renderItem={({ item }: { item: Country }) => (
             <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t("countries.retry")}
+              onPress={() => refetch()}
               style={[
-                styles.row,
+                styles.retry,
                 {
                   backgroundColor: colors.surface,
                   borderColor: colors.border,
                 },
               ]}
-              onPress={() =>
-                router.push({
-                  pathname: "/countries/[id]",
-                  params: { id: item.id },
-                })
-              }
             >
-              <Text style={[styles.rowLabel, { color: colors.text }]}>
-                {item.name}
+              <Text style={{ color: colors.text, fontWeight: "600" }}>
+                {t("countries.retry")}
               </Text>
             </Pressable>
-          )}
-        />
+          </View>
+        ) : (
+          <FlashList
+            data={filtered}
+            keyExtractor={(item) => item.code}
+            style={styles.list}
+            contentContainerStyle={styles.listContent}
+            keyboardDismissMode="on-drag"
+            ListEmptyComponent={
+              <Text style={[styles.message, { color: colors.textMuted }]}>
+                {t("countries.empty")}
+              </Text>
+            }
+            renderItem={({ item }: { item: Country }) => (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={item.name}
+                style={[
+                  styles.row,
+                  {
+                    backgroundColor: colors.surface,
+                    borderColor: colors.border,
+                  },
+                ]}
+                onPress={() =>
+                  router.push({
+                    pathname: "/countries/[id]",
+                    params: { id: item.code },
+                  })
+                }
+              >
+                <Image
+                  source={{ uri: item.flagPng }}
+                  style={styles.flag}
+                  contentFit="cover"
+                  accessibilityLabel={item.flagAlt ?? item.name}
+                />
+                <View style={styles.rowText}>
+                  <Text style={[styles.rowLabel, { color: colors.text }]}>
+                    {item.name}
+                  </Text>
+                  <Text style={[styles.rowMeta, { color: colors.textMuted }]}>
+                    {item.region}
+                  </Text>
+                </View>
+              </Pressable>
+            )}
+          />
+        )}
       </View>
     </Screen>
   );
@@ -106,6 +156,13 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 8,
   },
+  center: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+    padding: 16,
+  },
   list: {
     flex: 1,
     width: "100%",
@@ -117,17 +174,40 @@ const styles = StyleSheet.create({
   row: {
     width: "100%",
     marginBottom: 8,
-    paddingVertical: 14,
+    paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 10,
     borderWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  flag: {
+    width: 40,
+    height: 28,
+    borderRadius: 4,
+  },
+  rowText: {
+    flex: 1,
   },
   rowLabel: {
     fontSize: 16,
     fontWeight: "500",
   },
-  empty: {
+  rowMeta: {
+    fontSize: 13,
+    marginTop: 2,
+  },
+  message: {
     fontSize: 14,
     paddingVertical: 8,
+  },
+  retry: {
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 10,
+    borderWidth: StyleSheet.hairlineWidth,
+    minHeight: 44,
+    justifyContent: "center",
   },
 });

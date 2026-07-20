@@ -11,7 +11,7 @@ export function ModeToggle() {
     <button
       aria-label="Toggle theme"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="rounded-md border border-zinc-300 px-2 py-1 text-sm dark:border-zinc-700"
+      className="h-9 w-9 cursor-pointer rounded-lg border border-zinc-300 text-sm transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-900"
     >
       <span className="dark:hidden">🌙</span>
       <span className="hidden dark:inline">☀️</span>

@@ -21,5 +21,8 @@ export function mapCountry(raw: RawCountry): Country {
 
 /** Maps and alphabetically sorts a list of raw countries by common name. */
 export function mapCountries(raw: RawCountry[]): Country[] {
-  return raw.map(mapCountry).sort((a, b) => a.name.localeCompare(b.name));
+  return raw
+    .map(mapCountry)
+    .filter((c) => c.code) // drop non-ISO entities (no stable id, no flag)
+    .sort((a, b) => a.name.localeCompare(b.name));
 }

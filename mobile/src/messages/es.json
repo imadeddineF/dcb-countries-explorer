@@ -10,12 +10,20 @@
     "language": "Idioma"
   },
   "countryDetail": {
-    "headerTitle": "País"
+    "headerTitle": "País",
+    "error": "No se pudo cargar este país.",
+    "retry": "Reintentar",
+    "capital": "Capital",
+    "population": "Población",
+    "region": "Región",
+    "languages": "Idiomas"
   },
   "countries": {
     "title": "Países",
     "search": "Buscar países",
-    "empty": "No se encontraron países"
+    "empty": "No se encontraron países",
+    "error": "Algo salió mal al cargar los países.",
+    "retry": "Reintentar"
   },
   "tabs": {
     "home": "Inicio",

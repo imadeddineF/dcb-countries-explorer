@@ -17,4 +17,5 @@ export const COUNTRY_FIELDS = [
   "languages",
 ] as const;
 
-export const PAGE_SIZE = 250;
+// Free-plan requests are capped at 100 objects; getCountries paginates past it.
+export const PAGE_SIZE = 100;
